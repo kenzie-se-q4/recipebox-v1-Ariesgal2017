@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.shortcuts import render
 """
 Author model:
 
@@ -32,4 +32,4 @@ class Recipe(models.Model):
     instructions = models.TextField()
 
     def __str__(self):
-        return render(f"{self.description} | {self.instructions}")
+        return render("{self.description} | {self.instructions}")
