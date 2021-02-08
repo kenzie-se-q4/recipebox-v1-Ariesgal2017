@@ -19,7 +19,7 @@ Recipe Model:
 
 class Author(models.Model):
     name = models.CharField(max_length=100)
-    bio = models.CharField(max_length=100)
+    bio = models.TextField()
 
     def __str__(self):
         return self.name
@@ -32,4 +32,4 @@ class Recipe(models.Model):
     instructions = models.TextField()
 
     def __str__(self):
-        return render(f"{self.description} | {self.instructions}")
+        return render(f"{self.author} | {self.title}")
