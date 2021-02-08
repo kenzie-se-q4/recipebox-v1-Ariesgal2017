@@ -42,8 +42,8 @@ def recipe_submit(request):
     if request.method == "POST":
         form = RecipeForm(request.POST)
         if form.is_valid():
-            data = form.cleaned_data()
-            new_item = RecipeForm.objects.create(
+            data = form.cleaned_data
+            new_item = Recipe.objects.create(
                 title=data['title'],
                 author=data['author'],
                 description=data['description'],

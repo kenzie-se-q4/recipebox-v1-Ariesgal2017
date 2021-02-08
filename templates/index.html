@@ -19,7 +19,7 @@
 
 <ul style="font-size: 45px; margin-left:18%">
     {% for item in recipes %}
-    <li><a href="/recipes/{{item.id}}/">{{item.title}}</a> -- by<a href="/authors/{{item.author.id}}">{{item.author.name}}</a>!!!!</li>
+    <li><a href="/recipes/{{item.id}}/">{{item.title}}</a> -- by <a href="/authors/{{item.author.id}}">{{item.author.name}}</a>!!!!</li>
     {% endfor %}
 </ul>
 <p style="margin-left:20%">
