@@ -17,13 +17,13 @@ class Recipe(models.Model):
 from django import forms
 from homepage.models import Author, Recipe
 
-class RecipeForm(forms.Form):
+class AddRecipeForm(forms.Form):
     title = forms.CharField(max_length=75)
     author = forms.ModelChoiceField(queryset=Author.objects.all())
     description = forms.CharField(widget=forms.Textarea)
     category = forms.CharField(max_length=20)
 
-class AuthorForm(forms.ModelForm):
+class AddAuthorForm(forms.ModelForm):
     class Meta:
         model = Author
         fields = [

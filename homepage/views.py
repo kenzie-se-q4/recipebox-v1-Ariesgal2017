@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from homepage.models import Author, Recipe
-from homepage.forms import RecipeForm, AuthorForm
+from homepage.forms import AddRecipeForm, AddAuthorForm
 # Create your views here.
 
 
