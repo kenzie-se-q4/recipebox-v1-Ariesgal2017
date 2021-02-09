@@ -37,7 +37,7 @@ def author_detail(request, author_id):
     }
 )
 
-def recipe_submit(request):
+def add_recipe(request):
     context = {}
     if request.method == "POST":
         form = RecipeForm(request.POST)
@@ -55,15 +55,15 @@ def recipe_submit(request):
     context.update({'form': form})
     return render(
         request, 
-        "recipe_form.html", 
+        "add_recipe.html", 
         context
     )
 
-def author_submit(request):
+def add_author(request):
     if request.method == "POST":
         form = AuthorForm(request.POST)
         form.save()
         return HttpResponseRedirect(reverse("homepage"))
 
     form = AuthorForm()
-    return render(request, "author_form.html", {"form": form})
+    return render(request, "add_author.html", {"form": form})
