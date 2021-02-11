@@ -19,7 +19,6 @@ from homepage.models import Author, Recipe
 
 class AddRecipeForm(forms.Form):
     title = forms.CharField(max_length=75)
-    author = forms.ModelChoiceField(queryset=Author.objects.all())
     description = forms.CharField(widget=forms.Textarea)
     category = forms.CharField(max_length=20)
 
@@ -30,3 +29,13 @@ class AddAuthorForm(forms.ModelForm):
             "name",
             "bio",
         ]
+
+class SignupForm(forms.Form):
+    name =  forms.CharField(max_length=100)
+    bio = forms.CharField(max_length=100)
+    username = forms.CharField(max_length=30)
+    password = forms.CharField(widget=forms.PasswordInput)
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=30)
+    password = forms.CharField(widget=forms.PasswordInput)

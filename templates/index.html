@@ -3,6 +3,7 @@
      Recipes
  </u>
 </h1>
+<header>{{request.user.is_authenticated}}</header>
 <p>
     <strong>
         <em style="font-size: 60px; margin-left:18%">
@@ -10,8 +11,8 @@
         </em>
     </strong>
   <div style="margin-left:40%;">
-    <input type=button onClick="location.href='author/submit/'" value='click here to add an Author'>
-    <input type=button onClick="location.href='recipe/submit/'" value='click here to add a recipe'>
+    <input type=button onClick="location.href='addAuthor/'" value='click here to add an Author'>
+    <input type=button onClick="location.href='addRecipe/'" value='click here to add a recipe'>
 </div>
 
 

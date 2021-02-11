@@ -1,10 +1,21 @@
 from django.db import models
 from django.shortcuts import render
+from django.contrib.auth.models import User
+
 """
+User:
+-------
+username ()
+password ()
+email ()
+one to one
+
 Author model:
 
 *   Name (CharField)
 *   Bio (TextField)
+one to many
+
 
 Recipe Model:
 
@@ -20,6 +31,7 @@ Recipe Model:
 class Author(models.Model):
     name = models.CharField(max_length=100)
     bio = models.CharField(max_length=100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -32,4 +44,4 @@ class Recipe(models.Model):
     instructions = models.TextField()
 
     def __str__(self):
-        return render("{self.description} | {self.instructions}")
+        return f"{self.title} | {self.author}"
