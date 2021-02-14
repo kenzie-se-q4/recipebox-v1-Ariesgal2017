@@ -6,7 +6,7 @@
 </p>
 
 <ul>
-    {% for item in recipes %}
-        <li><a href="/recipes/{{item.id}}/">{{item.title}}</a>-- by <a href="/authors/{{item.Author.id}}">{{author.name}}</a>!!!!</li>
+    {% for recipe in recipes %}
+        <li><a href="/recipes/{{recipe.id}}/">{{recipe.title}}</a>-- by <a href="/authors/{{item.Author.id}}">{{author.name}}</a>!!!!</li>
     {% endfor %}
 </ul>

@@ -30,7 +30,7 @@ DEBUG = True
 # MILDLY IMPORTANT - if set to false wont get errors, log handling, etc.
 ALLOWED_HOSTS = ["*"]
 # needed if deploying something
-
+LOGIN_URL = "/login/"
 # Application definition('.example.com')
 
 INSTALLED_APPS = [
