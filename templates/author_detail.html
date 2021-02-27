@@ -1,0 +1,12 @@
+<h1>{{author.name}}</h1>
+<h3>{{author.bio}}</h3>
+
+<p>
+    This person has written the following Recipes:
+</p>
+
+<ul>
+    {% for item in recipes %}
+        <li><a href="/recipes/{{item.id}}/">{{item.title}}</a>-- by <a href="/authors/{{item.Author.id}}">{{author.name}}</a>!!!!</li>
+    {% endfor %}
+</ul>

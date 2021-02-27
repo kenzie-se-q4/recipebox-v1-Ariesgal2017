@@ -1,0 +1,24 @@
+<h1 style="font-size: 150px; margin-left:37%">
+ <u>
+     Recipes
+ </u>
+</h1>
+<p>
+    <strong>
+        <em style="font-size: 60px; margin-left:18%">
+            This is my super awesome page of awesome Recipes!
+        </em>
+    </strong>
+
+
+</p>
+
+<ul style="font-size: 45px; margin-left:18%">
+    {% for item in recipes %}
+    <li><a href="/recipes/{{item.id}}/">{{item.title}}</a> -- by<a href="/authors/{{item.author.id}}">{{item.author.name}}</a>!!!!</li>
+    {% endfor %}
+</ul>
+<p style="margin-left:20%">
+   *** MORE COMING SOON!!! CHECK BACK SOON FPR UPDATES.....
+    sorry I couldnt resist trying to make it look just a little bit pretty :)
+</p>
