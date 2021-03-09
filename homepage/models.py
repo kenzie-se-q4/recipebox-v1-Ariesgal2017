@@ -18,10 +18,13 @@ from django.contrib.auth.models import User
 
 
 
+#! added favorites.
 class Author(models.Model):
     name = models.CharField(max_length=150)
     bio = models.CharField(max_length=100)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    favorites = models.ManyToManyField('Recipe', related_name='author_faves')
+
          
     def __str__(self):
         return self.name

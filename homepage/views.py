@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect, reverse
+from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
 from django.contrib.auth.models import User
 #added logout
 from django.contrib.auth import login, authenticate, logout
@@ -123,3 +123,28 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('homepage'))
+
+
+## CODE ADDED BY BRITT BANNISTER 
+@login_required 
+def edit_recipe(request, recipe_id):
+    recipe = Recipe.objects.filter(id = recipe_id).first()
+    if request.method == 'POST':
+        form = EditRecipe(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            recipe.title = data['title']
+            recipe.time_required = data['time_required']
+            recipe.instructions = data['instructions']
+            recipe.description = data['description']
+            recipe.save()
+            return HttpResponseRedirect(reverse('recipe_detail', args=[recipe.id]))
+    
+    else:
+        form = EditRecipe({
+            'title': recipe.title,
+            'time_required': recipe.time_required,
+            'instructions': recipe.instructions,
+            'description': recipe.description
+        })
+        return render(request, 'generic_form.html', {'form':form})
