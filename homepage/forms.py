@@ -16,11 +16,14 @@ class Recipe(models.Model):
 
 from django import forms
 from homepage.models import Author, Recipe
-
+#!added fields to your add recipe form that were missing.
 class AddRecipeForm(forms.Form):
     title = forms.CharField(max_length=75)
-    # author = forms.ModelChoiceField(queryset=Author.objects.all())
+    author = forms.ModelChoiceField(queryset=Author.objects.all())
     description = forms.CharField(widget=forms.Textarea)
+    instructions = forms.CharField(widget=forms.Textarea)
+    time_required = forms.CharField(max_length=100)
+
 
 class AddAuthorForm(forms.ModelForm):
     class Meta:
@@ -39,3 +42,15 @@ class SignupForm(forms.Form):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=36)
     password = forms.CharField(widget=forms.PasswordInput)
+
+##ADDED BY BRITT BANNISTER:
+class EditRecipe(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = [
+            'title',
+            'author',
+            'time_required',
+            'instructions',
+            'description'
+        ]
