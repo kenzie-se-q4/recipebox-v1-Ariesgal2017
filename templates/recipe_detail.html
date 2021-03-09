@@ -1,4 +1,4 @@
-<a href="{% url 'homepage' %}"><button>homepage</button></a>
+<a href='{% url 'homepage' %}'><button>homepage</button></a>
 
 <h1>{{recipe.title}}</h1>
 <h3>{{recipe.author.name}}</h3>
@@ -13,4 +13,5 @@
 <p>
     <em>{{recipe.instructions}}</em>
 </p>
-<button><a href="/recipe/edit/{{recipe.id}}">Edit Recipe</a></button>
+<button><a href='/recipe/edit/{{recipe.id}}'>Edit Recipe</a></button>
+<a method='POST' href='/addfavorite/{{recipe.id}}/{{request.user.id}}'><button>Add to faves</button></a>

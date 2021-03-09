@@ -148,3 +148,10 @@ def edit_recipe(request, recipe_id):
             'description': recipe.description
         })
         return render(request, 'generic_form.html', {'form':form})
+
+def add_favorite(request, recipe_id, author_id):
+    author = Author.objects.filter(id = request.user.id).first()
+    recipe = Recipe.objects.filter(id = recipe_id).first()
+    author.favorites.add(recipe)
+    author.save()
+    return HttpResponseRedirect(reverse('author_detail', args=[request.user.id]))
