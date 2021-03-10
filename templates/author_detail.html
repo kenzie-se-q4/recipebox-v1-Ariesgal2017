@@ -1,4 +1,7 @@
-    <a href="{% url 'homepage' %}"><button>homepage</button></a>
+<a href="{% url 'homepage' %}"><button>homepage</button></a>
+{% if not authors %}
+    <h2>No user found</h2>
+{% endif %}
 
 <h1>{{author.name}}</h1>
 <h3>{{author.bio}}</h3>
@@ -9,6 +12,17 @@
 
 <ul>
     {% for recipe in recipes %}
-        <li><a href="/recipes/{{recipe.id}}/">{{recipe.title}}</a>-- by <a href="/authors/{{item.Author.id}}">{{author.name}}</a>!!!!</li>
+        <li><a href='/recipes/{{recipe.id}}/'>{{recipe.title}}</a>
     {% endfor %}
 </ul>
+
+<h3>Favorited:</h3>
+{% if favorites %}
+<ul>
+    {% for fave in favorites %}
+    <li>
+        <button><a href='/recipes/{{fave.id}}'>{{fave.title}}</a></button>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}

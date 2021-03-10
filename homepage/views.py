@@ -6,12 +6,15 @@ from homepage.models import Author, Recipe
 from homepage.forms import AddRecipeForm, AddAuthorForm, SignupForm, LoginForm, EditRecipe
 from django.contrib.auth.decorators import login_required
 
+#! added in favorites field from model to render
 def author_detail(request, author_id):
     author_obj = Author.objects.get(id=author_id)
     recipes = Recipe.objects.filter(author=author_obj)
+    favorites = author_obj.favorites.all()
     return render(request, "author_detail.html", {
         "author": author_obj,
         "recipes": recipes,
+        'favorites':favorites
     })
 
 
@@ -39,7 +42,7 @@ def recipe_submit(request):
             data = form.cleaned_data
             recipe = Recipe.objects.create(
                 title = data['title'],
-                author = request.user.author,
+                author = data['author'],
                 description = data['description'],
                 time_required = data['time_required'],
                 instructions = data['instructions']
@@ -58,26 +61,25 @@ def recipe_submit(request):
 #! forgot to check if form is valid, added that in. also added in create user and newform. Also added in a condition to check is user is staff to submit the form. added error template.
 @login_required
 def author_submit(request):
-    if request.method == "POST":
-        form = AddAuthorForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            usr = User.objects.create_user(
-                username = data['username'],
-                password = data['password']
-            )
-            newform = Author.objects.create(
-                name = data['name'],
-                user = usr
-            )
-            newform.save()
-        return HttpResponseRedirect(reverse("homepage"))
+        if request.method == "POST":
+            form = AddAuthorForm(request.POST)
+            if form.is_valid():
+                data = form.cleaned_data
+                usr = User.objects.create_user(
+                    username = data['name'],
+                )
+                newform = Author.objects.create(
+                    name = data['name'],
+                    user = usr
+                )
+                newform.save()
+            return HttpResponseRedirect(reverse("homepage"))
 
-    form = AddAuthorForm()
-    if request.user.is_staff:
-        return render(request, "generic_form.html", {"form": form})
-    
-    return render(request, 'error.html')
+        form = AddAuthorForm()
+        if request.user.is_staff == True:   
+            return render(request, "generic_form.html", {"form": form})
+
+        return render(request, 'error.html')
 
 #! fixed this view to make it consistent with the other form views, added authenticate.
 def signup_view(request):
@@ -138,6 +140,7 @@ def edit_recipe(request, recipe_id):
             recipe.instructions = data['instructions']
             recipe.description = data['description']
             recipe.save()
+
             return HttpResponseRedirect(reverse('recipe_detail', args=[recipe.id]))
     
     else:
@@ -149,9 +152,10 @@ def edit_recipe(request, recipe_id):
         })
         return render(request, 'generic_form.html', {'form':form})
 
-def add_favorite(request, recipe_id, author_id):
-    author = Author.objects.filter(id = request.user.id).first()
-    recipe = Recipe.objects.filter(id = recipe_id).first()
-    author.favorites.add(recipe)
-    author.save()
-    return HttpResponseRedirect(reverse('author_detail', args=[request.user.id]))
+
+@login_required
+def favorite(request, id):
+    recipe = Recipe.objects.get(id=id)
+    request.user.author.favorites.add(recipe)
+    request.user.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
