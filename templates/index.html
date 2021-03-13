@@ -1,0 +1,38 @@
+<a href="{% url 'recipe_submit' %}"><button>Add Recipe</button></a>
+<a href="{% url 'author_submit' %}"><button>Add Author</button></a>
+<a href="{% url 'logout' %}"><button>Logout</button></a>
+{% if user.is_authenticated %}
+<h1>
+ <u>
+     Recipes
+ </u>
+</h1>
+    <strong>
+        <em>
+            This is my super awesome page of awesome Recipes!
+        </em>
+    </strong>
+
+    <h3>Logged in as {{user.username}}</h3>
+    <br>
+    <ul>
+        {% for item in recipes %}
+        <li><a href="/recipes/{{item.id}}/">{{item.title}}</a> -- by <a href="/authors/{{item.author.id}}">{{item.author.name}}</a>!!!!</li>
+    </ul>
+    <button><a href='/recipe/edit/{{item.id}}'>Edit Recipe</a></button>
+    <button><a href='/favorite/{{item.id}}'>Favorite</a></button>
+
+
+
+    {% endfor %}
+
+    
+    {% else %}
+    <h1>Please <a href="/login/">Login</a></h1>
+    {% endif %}
+    
+
+<!-- <p>
+   *** MORE COMING SOON!!! CHECK BACK SOON FPR UPDATES.....
+    sorry I couldnt resist trying to make it look just a little bit pretty :)
+</p> -->

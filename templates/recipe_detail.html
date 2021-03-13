@@ -1,0 +1,22 @@
+<a href='{% url 'homepage' %}'><button>homepage</button></a>
+<h1>{{recipe.title}}</h1>
+<h3>{{recipe.author.name}}</h3>
+
+<p>
+    <ul>
+        <strong>{{recipe.description}}</strong>
+    </ul>
+
+</p>
+
+<p>
+    <em>{{recipe.instructions}}</em>
+</p>
+
+<button><a href='/recipe/edit/{{recipe.id}}'>Edit Recipe</a></button>
+{% if request.user.is_authenticated %}
+        <button><a href='/favorite/{{recipes.id}}'>Favorite</a></button>
+{% endif %}
+
+
+
