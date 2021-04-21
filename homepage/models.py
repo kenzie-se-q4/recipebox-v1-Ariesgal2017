@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 """
 class Author(models.Model):
     name = models.CharField(max_length=100)
@@ -35,3 +36,44 @@ class Recipe(models.Model):
      
     def __str__(self):
         return f"{self.title} | {self.author}"
+=======
+from django.db import models
+from django.shortcuts import render
+from recipeBox import settings
+"""
+Author model:
+
+*   Name (CharField)
+*   Bio (TextField)
+
+Recipe Model:
+
+*   Title (CharField)
+*   Author (ForeignKey)
+*   Description (TextField)
+*   Time Required (Charfield) (for example, "One hour")
+*   Instructions (TextField)
+
+"""
+# Create your models here.
+
+class Author(models.Model):
+    pass
+
+class Ticket(models.Model):
+    title = models.CharField(max_length=20)
+    # timeDateFiled = models.DateTimeField(default=timezone.now)
+    description = models.CharField(max_length=50)
+    userWhoFiledTicket = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name = '+', on_delete=models.CASCADE)
+    ticketStatus = models.CharField(max_length=2)
+    possibleStatuses = (('N', 'New'),
+                        ('IP', 'In Progress'),
+                        ('D', 'Done'),
+                        ('IV', 'Invalid'),
+    )
+    userAssignedToTicket = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='+', on_delete=models.CASCADE)
+    userWhoCompletedTicket = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='+', on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.title
+>>>>>>> Stashed changes
